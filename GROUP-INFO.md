@@ -5,7 +5,7 @@
 
 ## Team Members
 - Eddie Cazares
--
+- Jasmine Wang
 -
 -
 
