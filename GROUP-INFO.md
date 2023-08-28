@@ -6,7 +6,7 @@
 ## Team Members
 - Eddie Cazares
 - Jasmine Wang
-- Venkata Manoj Mugi
+- Venkata Manoj Mugi 
 - Shadin Hussein
 
 ## Project Idea
