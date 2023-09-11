@@ -7,6 +7,7 @@
 - Eddie Cazares
 - Jasmine Wang
 - Venkata Manoj Mugi 
+- Erjian Gao
 
 ## Project Idea
 - A travel-focused social media platform designed to bring together people who share a passion for travel
