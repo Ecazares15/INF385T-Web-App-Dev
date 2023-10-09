@@ -1,10 +1,9 @@
+import FeedPost from "../components/FeedPost"
 
 
 function Feed() {
     return (
-        <div>
-            <h1>Feed</h1>
-        </div>
+        <FeedPost/>
     )
 }
 
