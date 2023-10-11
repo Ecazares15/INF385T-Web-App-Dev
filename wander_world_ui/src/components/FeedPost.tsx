@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
@@ -8,16 +8,18 @@ import Button from "@mui/material/Button";
 
 function FeedPost() {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card>
       <CardMedia
-        sx={{ height: 140 }}
+        component="img"
+        height="360"
+        image="https://swiperjs.com/demos/images/nature-1.jpg"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           Post Title
         </Typography>
         <Typography variant="body2" color="text.secondary">
-            Post Content
+          Post Content
         </Typography>
       </CardContent>
       <CardActions>
