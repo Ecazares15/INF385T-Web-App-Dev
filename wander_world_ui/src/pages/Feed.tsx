@@ -19,13 +19,13 @@ function onSaveClick(): void {
 
 function App(): JSX.Element {
   const numbers: number[] = [1, 2, 3, 4, 5];
-  const listItems: object[] = numbers.map((number) => (
+  const listItems = numbers.map((number) => (
     <SwiperSlide>
       {" "}
       <FeedPost
         image="https://swiperjs.com/demos/images/nature-1.jpg"
         title="Post Title"
-        content="This is the description"
+        desc="This is the description"
         onLikeClick={onLikeClick}
         onSaveClick={onSaveClick}
       ></FeedPost>

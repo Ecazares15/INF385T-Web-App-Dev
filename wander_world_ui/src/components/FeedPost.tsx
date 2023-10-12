@@ -9,12 +9,12 @@ import Button from "@mui/material/Button";
 interface FeedPostProps {
   image: string;
   title: string;
-  content: string;
+  desc: string;
   onLikeClick: () => void;
   onSaveClick: () => void;
 }
 
-function FeedPost({ image, title, content, onLikeClick, onSaveClick }: FeedPostProps): JSX.Element {
+function FeedPost({ image, title, desc, onLikeClick, onSaveClick }: FeedPostProps): JSX.Element {
   return (
     <Card>
       <CardMedia
@@ -27,7 +27,7 @@ function FeedPost({ image, title, content, onLikeClick, onSaveClick }: FeedPostP
           {title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {content}
+          {desc}
         </Typography>
       </CardContent>
       <CardActions>
