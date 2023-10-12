@@ -1,23 +1,34 @@
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 
 import "./styles/Feed.css";
 
-// import required modules
 import { EffectCoverflow } from "swiper/modules";
 import FeedPost from "../components/FeedPost";
 
-function App() {
-  const numbers = [1, 2, 3, 4, 5];
-  const listItems = numbers.map((number) => (
+function onLikeClick(): void {
+  console.log("Like clicked");
+}
+
+function onSaveClick(): void {
+  console.log("Save clicked");
+}
+
+function App(): JSX.Element {
+  const numbers: number[] = [1, 2, 3, 4, 5];
+  const listItems: object[] = numbers.map((number) => (
     <SwiperSlide>
       {" "}
-      <FeedPost />{" "}
+      <FeedPost
+        image="https://swiperjs.com/demos/images/nature-1.jpg"
+        title="Post Title"
+        content="This is the description"
+        onLikeClick={onLikeClick}
+        onSaveClick={onSaveClick}
+      ></FeedPost>
     </SwiperSlide>
   ));
   return (
@@ -36,7 +47,7 @@ function App() {
         }}
         modules={[EffectCoverflow]}
       >
-        { listItems }
+        {listItems}
       </Swiper>
     </div>
   );

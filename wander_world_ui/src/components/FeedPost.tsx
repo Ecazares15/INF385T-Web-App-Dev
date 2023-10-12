@@ -6,25 +6,33 @@ import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 
-function FeedPost() {
+interface FeedPostProps {
+  image: string;
+  title: string;
+  content: string;
+  onLikeClick: () => void;
+  onSaveClick: () => void;
+}
+
+function FeedPost({ image, title, content, onLikeClick, onSaveClick }: FeedPostProps): JSX.Element {
   return (
     <Card>
       <CardMedia
         component="img"
         height="360"
-        image="https://swiperjs.com/demos/images/nature-1.jpg"
+        image={image}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Post Title
+          {title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Post Content
+          {content}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Like</Button>
-        <Button size="small">Save</Button>
+        <Button size="small" onClick={onLikeClick}>Like</Button>
+        <Button size="small" onClick={onSaveClick}>Save</Button>
       </CardActions>
     </Card>
   );
