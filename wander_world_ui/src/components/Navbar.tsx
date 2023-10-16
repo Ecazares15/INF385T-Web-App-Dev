@@ -1,3 +1,6 @@
+import React from "react";
+import { Link } from "react-router-dom";
+
 function Navbar() {
   return (
     <nav id="app-navbar" className="navbar bg-body-tertiary">
@@ -6,8 +9,12 @@ function Navbar() {
           <div className="col-1">Icon</div>
           <div className="col-2">Wander World</div>
           <div className="col-6"></div>
-          <div className="col-1">Feed</div>
-          <div className="col-1">Community</div>
+          <div className="col-1">
+            <Link to="/Feed">Feed</Link>
+          </div>
+          <div className="col-1">
+            <Link to="/Community">Community</Link>
+          </div>
           <div className="col-1">Icon</div>
         </div>
       </div>
