@@ -1,1 +1,7 @@
-
+:root {
+    --main-bg-color: brown;
+    --primary-color: #f1f1f1;
+    --secondary-color: #f1f1f1;
+    --accent-color: #f1f1f1;
+    --text-color: #f1f1f1;
+}

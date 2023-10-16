@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
@@ -6,23 +6,33 @@ import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 
-function FeedPost() {
+interface FeedPostProps {
+  image: string;
+  title: string;
+  desc: string;
+  onLikeClick: () => void;
+  onSaveClick: () => void;
+}
+
+function FeedPost({ image, title, desc, onLikeClick, onSaveClick }: FeedPostProps): JSX.Element {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card>
       <CardMedia
-        sx={{ height: 140 }}
+        component="img"
+        height="360"
+        image={image}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Post Title
+          {title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-            Post Content
+          {desc}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Like</Button>
-        <Button size="small">Save</Button>
+        <Button size="small" onClick={onLikeClick}>Like</Button>
+        <Button size="small" onClick={onSaveClick}>Save</Button>
       </CardActions>
     </Card>
   );
