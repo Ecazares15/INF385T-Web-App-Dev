@@ -1,0 +1,28 @@
+version: '3.7'
+services:
+  wanderworld-api:
+    container_name: 'wanderworld-api'
+    build:
+      context: wander_world_api/.
+      dockerfile: Dockerfile
+    ports:
+      - 8080:5000
+    networks:
+      - wanderworld-network
+
+  wanderworld-db:
+    image: mongo:latest
+    container_name: 'wanderworld-db'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    ports:
+      - 27017:27017
+    volumes:
+      - ./wander_world_db/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+    networks:
+      - wanderworld-network
+
+networks:
+  wanderworld-network:
+    name: wanderworld-network
