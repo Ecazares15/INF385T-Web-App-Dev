@@ -1,25 +1,50 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { FormEvent } from 'react';
+import { Button, Container, Form, Nav, Navbar } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
+import musicMapLogo from '../assets/musicmaplogo.svg'
+import wanderWorldLogo from '../assets/wanderworld_logo.svg'
 
-function Navbar() {
-  return (
-    <nav id="app-navbar" className="navbar bg-body-tertiary">
-      <div className="container m-0 p-0 text-center">
-        <div className="row align-items-center w-100">
-          <div className="col-1">Icon</div>
-          <div className="col-2">Wander World</div>
-          <div className="col-6"></div>
-          <div className="col-1">
-            <Link to="/Feed">Feed</Link>
-          </div>
-          <div className="col-1">
-            <Link to="/Community">Community</Link>
-          </div>
-          <div className="col-1">Icon</div>
+const NavBar: React.FC<{}> = () => {
+
+    return (
+        <div>
+            <Navbar variant="dark" expand="lg" style={{backgroundColor: "#1f4098"}}>
+                <Container>
+                    <Navbar.Brand href="/">
+                        <img src={wanderWorldLogo} 
+                            height="30"
+                            className="d-inline-block align-top"
+                            alt="logo"/>{'  '}
+                        WanderWorld
+                    </Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="me-auto">
+                            
+                            <LinkContainer to="/about">
+                                <Nav.Link>About</Nav.Link>
+                            </LinkContainer>
+
+                            <LinkContainer to="/feed">
+                                <Nav.Link>Feed</Nav.Link>
+                            </LinkContainer>
+
+                            <LinkContainer to="/community">
+                                <Nav.Link>Community</Nav.Link>
+                            </LinkContainer>
+
+                            
+                            <LinkContainer to="/profile">
+                                <Nav.Link>Profile</Nav.Link>
+                            </LinkContainer>
+
+                        </Nav>
+
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
         </div>
-      </div>
-    </nav>
-  );
+    )
 }
 
-export default Navbar;
+export default NavBar
