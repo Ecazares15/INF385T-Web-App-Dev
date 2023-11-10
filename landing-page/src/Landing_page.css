@@ -1,0 +1,131 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.custom-navbar{
+  background-color: #295296; 
+}
+
+.btn-primary{
+  margin-right: 2px; 
+}
+
+.logo{
+  /* position: absolute; */
+  left: 100px; 
+}
+
+.profile-circle {
+  position: absolute;
+  top: 5px;
+  right: 15px; 
+}
+
+/* The CSS styles for the image-container, content, and individual tiles remain the same as in the previous examples. */
+
+.tiles {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tile {
+  /* flex: 1; */
+  width: 400px;
+  height: 320px;
+  /* padding: 30px; */
+  background-color: #fff;
+  border-radius: 15px;
+  text-align: center;
+  border: 1px solid #0c0000;
+  margin: 30px;
+}
+
+.tile img {
+ 
+  width: 100%;
+  height: 274px;
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
+
+
+.tile h2 {
+  font-size: 18px;
+}
+
+.tile a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.tile .tile-button-profile {
+  position: relative; 
+  margin-top: 20px; 
+  border-radius: 10px;
+}
+
+.tile .tile-button-feed {
+  position: relative; 
+  margin-top: 20px; 
+  border-radius: 10px;
+}
+
+.tile .tile-button-comm {
+  position: relative; 
+  margin-top: 20px; 
+  border-radius: 10px;
+}
+
+
+.container carousel{
+  max-width: 100% !important;
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+  margin: 0 !important;
+  /*position: relative;*/
+}
+
+.footer {
+  background-color: #295296; 
+  color: #fff; 
+  text-align: center; 
+  margin-top: 100px; 
+  padding: 5px; 
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
