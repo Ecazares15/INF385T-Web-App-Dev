@@ -7,8 +7,9 @@ app = Flask(__name__)
 CORS(app)
 
 # Connect to MongoDB
-client = MongoClient('wanderworld-db', username='user', password='user', authSource='wander_world')
-db = client['wander_world']
+uri = "mongodb+srv://jasminewang:1234@inf385tcluster.b6esmhr.mongodb.net/?retryWrites=true&w=majority"
+client = MongoClient(uri)
+db = client['WanderWorld']
 
 @app.route("/")
 def index():

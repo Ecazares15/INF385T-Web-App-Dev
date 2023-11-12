@@ -11,6 +11,7 @@ import Register from "./pages/Register";
 import Feed from "./pages/Feed";
 import Community from "./pages/Community";
 import Profile from "./pages/Profile";
+import Post from "./pages/Post";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/community" element={<Community />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/feed/create" element={<Post />} />
         </Routes>
       </div>
     </LocalizationProvider>
