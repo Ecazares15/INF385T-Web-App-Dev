@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import axios from "axios";
+import Button from "@mui/material/Button";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -10,6 +11,7 @@ import "./styles/Feed.css";
 
 import { EffectCoverflow } from "swiper/modules";
 import FeedPost from "../components/FeedPost";
+import { Link } from "react-router-dom";
 
 interface Post {
   image: string;
@@ -58,6 +60,9 @@ function App(): JSX.Element {
   ));
   return (
     <div className="feed-swiper-container">
+      <Button className="mb-3" variant="contained">
+        <Link to="/feed/create" style={{textDecoration: "none", color: "black"}}>Create Post</Link>{" "}
+      </Button>
       <Swiper
         effect={"coverflow"}
         grabCursor={true}
