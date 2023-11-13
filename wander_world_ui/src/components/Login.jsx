@@ -5,18 +5,11 @@ import PasswordField from "./PasswordField";
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton } from "@mui/material";
 import { Close, Send } from "@mui/icons-material";
 import { useValue } from "../context/ContextProvider";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../firebase'
 
 function Login() {
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-
-  // const handleLogin = async () => {
-  //   console.log("Email:", email);
-  //   console.log("Password:", password);
-
-  //   // handle authentication
-  // };
-
+  
   const {state:{openLogin}, dispatch} = useValue()
   const [title, setTitle] = useState('Login')
   const [isRegister, setIsRegister] = useState(false)
@@ -29,13 +22,47 @@ function Login() {
     dispatch({type:'CLOSE_LOGIN'})
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const email = emailRef.current.value
     const password = passwordRef.current.value
-    const confirmPassword = confirmPasswordRef.current.value
-    if (password !== confirmPassword) {
-      console.log("here")
-      dispatch({type:'UPDATE_ALERT', payload: {open:true, severity:'error', message:"Passwords don't match"}})
+    if (isRegister) {
+      const name = nameRef.current.value
+      const confirmPassword = confirmPasswordRef.current.value
+      // REGISTER
+      if (password !== confirmPassword) {
+        
+        dispatch({type:'UPDATE_ALERT', payload: {open:true, severity:'error', message:"Passwords don't match"}})
+        return
+      } 
+      await createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // signed in!
+          const user = userCredential.user
+          console.log(user)
+          dispatch({type:'UPDATE_ALERT', payload: {open:true, severity:'success', message:"Account created!"}})
+          handleClose()
+          // TODO: add uid + name to database
+        }).catch((error) => {
+          const errorCode = error.code
+          const errorMessage = error.message
+          console.log(errorCode, errorMessage)
+        })
+    } else {
+      // LOGIN
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // signed in!
+          const user = userCredential.user
+          console.log(user)
+          dispatch({type:'UPDATE_ALERT', payload: {open:true, severity:'success', message:"Logged in successfully!"}})
+          handleClose()
+        }).catch((error) => {
+          const errorCode = error.code
+          const errorMessage = error.message
+          console.log(errorCode, errorMessage)
+          dispatch({type:'UPDATE_ALERT', payload: {open:true, severity:'error', message:"Invalid email or password"}})
+        })
     }
   }
 
@@ -108,32 +135,3 @@ function Login() {
 }
 
 export default Login;
-
-{/* <Container
-      className="mt-5"
-      sx={{ display: "flex", justifyContent: "center" }}>
-      <Paper className="w-50 h-50 text-center" elevation={1}>
-        <div className="m-5">
-          <div className="pb-3">
-            <h1>Login</h1>
-          </div>
-          <div className="pb-3">
-            <TextField
-              required
-              label="Email"
-              type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className="pb-3">
-            <PasswordInput setPassword={setPassword} />
-          </div>
-          <div>
-            <Button variant="contained" onClick={handleLogin}>
-              Login
-            </Button>
-          </div>
-        </div>
-      </Paper>
-    </Container> */}

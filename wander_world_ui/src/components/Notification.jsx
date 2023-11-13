@@ -17,7 +17,7 @@ const Notification = () => {
       onClose={handleClose}
       anchorOrigin={{vertical: 'top', horizontal: 'center'}}>
         <Alert
-          onCLose={handleClose}
+          onClose={handleClose}
           severity={alert.severity}
           sx={{width:'100%'}}
           variant='filled'

@@ -20,13 +20,13 @@ const theme = createTheme({
       main: colors.blue[800]
     },
     secondary: {
-      main: "#f79256"
+      main: colors.deepOrange[500]
     },
     success: {
-      main: "#5BC2A3"
+      main: colors.green[800]
     },
     info: {
-      main: "#00b2ca"
+      main: colors.teal[400]
     }
   }
 })

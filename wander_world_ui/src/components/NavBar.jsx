@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useEffect} from 'react';
 import { AppBar, Box, Button, Container, IconButton, Toolbar, Typography, Menu, MenuItem, Tooltip, Avatar, ListItemIcon } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Lock, Person, Logout } from '@mui/icons-material';
@@ -6,6 +6,8 @@ import wanderWorldLogo from '../assets/wanderworld_logo.svg';
 import { Link } from 'react-router-dom';
 import photoURL from '../assets/profile.jpg'
 import { useValue } from '../context/ContextProvider'
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { auth } from '../firebase'
 
 const user = { name: 'test', photoURL }
 
@@ -14,8 +16,8 @@ const settings = ['Profile', 'Logout'];
 
 const NavBar = () => {
 
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -32,6 +34,28 @@ const NavBar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log("uid", user.uid)
+        console.log("email", user.email)
+        dispatch({ type: 'UPDATE_USER', payload: {name: user.email, photoURL: null} })
+      } else {
+        console.log("user is logged out")
+      }
+    })
+  }, [])
+
+  const handleLogout = () => {
+    signOut(auth).then(() => {
+      // sign out successful
+      console.log("signed out successfully")
+      dispatch({ type: 'UPDATE_USER', payload: null })
+    }).catch((error) => {
+      console.log(error)
+    })
+  }
 
   const { state: { currentUser }, dispatch } = useValue()
 
@@ -148,7 +172,7 @@ const NavBar = () => {
                   <ListItemIcon><Person fontSize='small' /></ListItemIcon>
                   <Link style={{ textDecoration: 'none', color: 'black' }} to="/profile">Profile</Link>
                 </MenuItem>
-                <MenuItem onClick={() => dispatch({ type: 'UPDATE_USER', payload: null })}>
+                <MenuItem onClick={handleLogout}>
                   <ListItemIcon><Logout fontSize='small' /></ListItemIcon>
                   Logout
                 </MenuItem>

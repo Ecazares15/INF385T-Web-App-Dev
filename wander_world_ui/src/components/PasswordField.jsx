@@ -27,7 +27,7 @@ const PasswordField = ({passwordRef, id='password', label='Password'}) => {
       required
       InputProps={{
         endAdornment: (
-          <InputAdornment>
+          <InputAdornment position='end'>
             <IconButton onClick={handleClick} onMouseDown={handleMouseDown}>
             {showPassword ? <VisibilityOff/> : <Visibility/>}
             </IconButton>

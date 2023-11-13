@@ -76,7 +76,7 @@ const Community: React.FC = () => {
                         />
                     </Grid>
                     <Grid item xs={12} container justifyContent="flex-end">
-                        <Button className="submit-button"  variant="contained" color="primary" onClick={submitThread} style={{ marginRight: '10px', backgroundColor: "rgb(31, 64, 152)"}}>
+                        <Button className="submit-button"  variant="contained" color="secondary" onClick={submitThread} style={{ marginRight: '10px'}}>
                             Publish
                         </Button>
                     </Grid>
