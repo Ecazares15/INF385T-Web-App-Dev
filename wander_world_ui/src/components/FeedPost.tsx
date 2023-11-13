@@ -4,21 +4,23 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 
 interface FeedPostProps {
   image: string;
-  title: string;
-  desc: string;
+  author: string;
+  caption: string;
+  numLikes: number;
   onLikeClick: () => void;
   onSaveClick: () => void;
 }
 
 function FeedPost({
   image,
-  title,
-  desc,
+  author,
+  caption,
+  numLikes,
   onLikeClick,
   onSaveClick,
 }: FeedPostProps): JSX.Element {
@@ -36,20 +38,20 @@ function FeedPost({
             <div className="w-100 h-100 d-flex justify-content-between">
               <div>
                 <Typography gutterBottom variant="h5" component="div">
-                  {title}
+                  {author}
                 </Typography>
               </div>
               <div>
                 <Button size="medium" onClick={onLikeClick}>
-                  <ThumbUpIcon fontSize="medium" />
+                  <FavoriteBorderOutlinedIcon fontSize="medium" />
                 </Button>
                 <Button size="medium" onClick={onSaveClick}>
-                  <FavoriteIcon fontSize="medium" />
+                  <BookmarkBorderOutlinedIcon fontSize="medium" />
                 </Button>
               </div>
             </div>
             <Typography variant="body2" color="text.secondary">
-              {desc}
+              {caption}
             </Typography>
             <Typography variant="body2" color="text.secondary">
               This is question 1 answer
