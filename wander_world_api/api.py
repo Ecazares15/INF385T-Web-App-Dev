@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 from pymongo import MongoClient
 
@@ -11,6 +11,7 @@ uri = "mongodb+srv://jasminewang:1234@inf385tcluster.b6esmhr.mongodb.net/?retryW
 client = MongoClient(uri)
 db = client['WanderWorld']
 
+
 @app.route("/")
 def index():
     """
@@ -20,7 +21,8 @@ def index():
         return '<h1>WanderWorld API</h1>'
     except Exception as e:
         return str(e)
-    
+
+
 @app.route('/users', methods=['GET'])
 def get_users():
     """
@@ -29,6 +31,7 @@ def get_users():
     user_collection = db['users']
     users = user_collection.find({}, {'_id': False})
     return jsonify(list(users))
+
 
 @app.route('/posts', methods=['GET'])
 def get_posts():
@@ -42,6 +45,7 @@ def get_posts():
     except Exception as e:
         return str(e)
 
+
 @app.route('/posts/add', methods=['POST'])
 def add_post(request):
     """
@@ -54,6 +58,20 @@ def add_post(request):
         return jsonify({'status': 'success'})
     except Exception as e:
         return jsonify({'status': 'failed', 'error': str(e)})
+
+
+@app.route('/threads', methods=['GET', 'POST'])
+def threads():
+    thread_collection = db['threads']
+    if request.method == 'GET':
+        print(thread_collection)
+        threadList = thread_collection.find({}, {'_id': False})
+        return jsonify(list(threadList))
+    elif request.method == 'POST':
+        thread = request.json
+        result = thread_collection.insert_one(thread)
+        return jsonify({'status': 'success'})
+
 
 if __name__ == "__main__":
     # Run Flask
