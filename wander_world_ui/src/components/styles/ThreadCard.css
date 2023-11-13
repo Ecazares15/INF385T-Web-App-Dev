@@ -1,0 +1,12 @@
+.thread-card {
+    margin: 20px 0;
+}
+
+.card-actions {
+    justify-content: flex-end;
+
+}
+
+.card-actions button {
+    color: rgb(31, 64, 152);
+}
