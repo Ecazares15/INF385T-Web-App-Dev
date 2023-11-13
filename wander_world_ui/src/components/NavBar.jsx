@@ -9,10 +9,7 @@ import { useValue } from '../context/ContextProvider'
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from '../firebase'
 
-const user = { name: 'test', photoURL }
-
 const pages = ['Feed', 'Community'];
-const settings = ['Profile', 'Logout'];
 
 const NavBar = () => {
 
