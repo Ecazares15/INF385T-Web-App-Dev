@@ -9,8 +9,24 @@ import communityPic from '../assets/commmunity.jpeg'
 import feedPic from '../assets/feed.jpeg'
 import profilePic from '../assets/profile.jpeg'
 import './styles/Home.css'
+import { useNavigate } from "react-router-dom";
 
 function Home(): JSX.Element {
+
+    let navigate = useNavigate()
+
+    const goToProfile = () => {
+        navigate('/profile')
+    }
+
+    const goToFeed = () => {
+        navigate('/feed')
+    }
+
+    const goToCommunity = () => {
+        navigate('/community')
+    }
+
     return (
         <div>
             <Carousel className="fixed-height-carousel">
@@ -57,33 +73,33 @@ function Home(): JSX.Element {
                     <img
                     src={feedPic} // replace with your image path
                     alt="Unique Experience"
-                    className="img-fluid mb-3"
+                    className="img-fluid mb-3 category-img"
                     />
                     <h5>More than a trip, it's a world of shared experiences</h5>
-                    <Button color="primary">Feed</Button>
+                    <Button color="primary" onClick={goToFeed}>Feed</Button>
                 </Col>
                 <Col md={4}>
                     <img
                     src={communityPic}
                     alt="Community"
-                    className="img-fluid mb-3"
+                    className="img-fluid mb-3 category-img"
                     />
                     <h5>Embrace the world's wonders together</h5>
-                    <Button color="secondary">Community</Button>
+                    <Button color="secondary" onClick={goToCommunity}>Community</Button>
                 </Col>
                 <Col md={4}>
                     <img
                     src={profilePic}
                     alt="Profile"
-                    className="img-fluid mb-3"
+                    className="img-fluid mb-3 category-img"
                     />
                     <h5>Navigate the world and share your story</h5>
-                    <Button color="success">Profile</Button>
+                    <Button color="success" onClick={goToProfile}>Profile</Button>
                 </Col>
                 </Row>
             </Container>
         </div>
     );
-} 
+}
 
 export default Home;
