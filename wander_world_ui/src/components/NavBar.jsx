@@ -4,7 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Lock, Person, Logout } from '@mui/icons-material';
 import wanderWorldLogo from '../assets/wanderworld_logo.svg';
 import { Link } from 'react-router-dom';
-import photoURL from '../assets/profile.jpg'
+import photoURL from '../assets/profilePhoto.jpg'
 import { useValue } from '../context/ContextProvider'
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from '../firebase'

@@ -1,0 +1,9 @@
+.fixed-height-carousel .carousel-item {
+  height: 45vh; /* Replace with the height you want */
+}
+
+.fixed-height-carousel .carousel-item img {
+  height: 100%;
+  object-fit: cover; /* This makes sure the image covers the area, may crop the image */
+}
+
