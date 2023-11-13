@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Typography, colors } from "@mui/material";
 import { Carousel, Container, Row, Col } from "react-bootstrap";
 import pic1 from '../assets/1.jpeg'
 import pic2 from '../assets/2.png'
@@ -70,30 +70,30 @@ function Home(): JSX.Element {
             <Container>
                 <Row className="text-center">
                 <Col md={4}>
+                    <Typography variant="h6" color="primary">Join a world of shared experiences</Typography>
                     <img
                     src={feedPic} // replace with your image path
-                    alt="Unique Experience"
+                    alt="Feed"
                     className="img-fluid mb-3 category-img"
                     />
-                    <h5>More than a trip, it's a world of shared experiences</h5>
                     <Button color="primary" onClick={goToFeed}>Feed</Button>
                 </Col>
                 <Col md={4}>
+                    <Typography variant="h6" color="secondary">Embrace the world's wonders together</Typography>
                     <img
                     src={communityPic}
                     alt="Community"
                     className="img-fluid mb-3 category-img"
                     />
-                    <h5>Embrace the world's wonders together</h5>
                     <Button color="secondary" onClick={goToCommunity}>Community</Button>
                 </Col>
                 <Col md={4}>
+                    <Typography variant="h6" style={{ color: colors.green[800]}}>Navigate the world and share your story</Typography>
                     <img
                     src={profilePic}
                     alt="Profile"
                     className="img-fluid mb-3 category-img"
                     />
-                    <h5>Navigate the world and share your story</h5>
                     <Button color="success" onClick={goToProfile}>Profile</Button>
                 </Col>
                 </Row>
