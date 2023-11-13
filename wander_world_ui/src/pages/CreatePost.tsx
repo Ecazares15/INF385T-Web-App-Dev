@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 
-function Post() {
+function CreatePost() {
   const [image, setImage] = useState({ preview: "", raw: "" });
 
   const handleChange = (e: any) => {
@@ -110,4 +110,4 @@ function Post() {
   );
 }
 
-export default Post;
+export default CreatePost;
