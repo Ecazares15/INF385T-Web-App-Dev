@@ -4,9 +4,12 @@
 
 .card-actions {
     justify-content: flex-end;
-
 }
 
 .card-actions button {
     color: rgb(31, 64, 152);
+}
+
+.comment-action {
+    justify-content: flex-end;
 }

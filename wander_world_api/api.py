@@ -1,3 +1,4 @@
+from bson import ObjectId
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from pymongo import MongoClient
@@ -10,6 +11,7 @@ CORS(app)
 uri = "mongodb+srv://jasminewang:1234@inf385tcluster.b6esmhr.mongodb.net/?retryWrites=true&w=majority"
 client = MongoClient(uri)
 db = client['WanderWorld']
+thread_collection = db['threads']
 
 
 @app.route("/")
@@ -62,15 +64,49 @@ def add_post(request):
 
 @app.route('/threads', methods=['GET', 'POST'])
 def threads():
-    thread_collection = db['threads']
     if request.method == 'GET':
         print(thread_collection)
-        threadList = thread_collection.find({}, {'_id': False})
-        return jsonify(list(threadList))
+        result = thread_collection.find({})
+        thread_list = []
+        for thread in result:
+            thread['_id'] = str(thread['_id'])
+            thread_list.append(thread)
+        return jsonify(thread_list)
     elif request.method == 'POST':
         thread = request.json
         result = thread_collection.insert_one(thread)
-        return jsonify({'status': 'success'})
+        new_thread = thread_collection.find_one({"_id": result.inserted_id})
+        if new_thread:
+            new_thread['_id'] = str(new_thread['_id'])
+        return jsonify({'status': 'success', 'thread': new_thread})
+
+
+@app.route('/threads/<thread_id>/like', methods=['POST'])
+def like_thread(thread_id):
+    obj_id = ObjectId(thread_id)
+    thread_collection.update_one({'_id': obj_id}, {'$inc': {'likes': 1}})
+    updated_thread = thread_collection.find_one({'_id': obj_id})
+    return jsonify({'likes': updated_thread.get('likes', 0)})
+
+
+@app.route('/threads/<thread_id>/dislike', methods=['POST'])
+def dislike_thread(thread_id):
+    obj_id = ObjectId(thread_id)
+    thread_collection.update_one({'_id': obj_id}, {'$inc': {'dislikes': 1}})
+    updated_thread = thread_collection.find_one({'_id': obj_id})
+    return jsonify({'dislikes': updated_thread.get('dislikes', 0)})
+
+
+@app.route('/threads/<thread_id>/comment', methods=['POST'])
+def comment_thread(thread_id):
+    obj_id = ObjectId(thread_id)
+    comment = request.json
+    result = thread_collection.update_one(
+        {'_id': obj_id},
+        {'$push': {'comments': comment}}
+    )
+    if result.modified_count:
+        return jsonify({'status': 'success', 'comment': comment})
 
 
 if __name__ == "__main__":
