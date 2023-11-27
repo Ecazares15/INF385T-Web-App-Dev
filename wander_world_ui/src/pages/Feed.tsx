@@ -34,8 +34,7 @@ function onSaveClick(): void {
 function Feed(): JSX.Element {
   const [posts, setPosts] = useState([]);
 
-  const hostname =
-    "https://wander-world-bfzkz0w9z-eddie-cazares-projects.vercel.app";
+  const hostname = "https://wander-world-api.vercel.app";
 
   useEffect(() => {
     axios

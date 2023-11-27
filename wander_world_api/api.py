@@ -6,14 +6,12 @@ from pymongo import MongoClient
 # Configure Flask
 app = Flask(__name__)
 CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
 
 # Connect to MongoDB
 uri = "mongodb+srv://jasminewang:1234@inf385tcluster.b6esmhr.mongodb.net/?retryWrites=true&w=majority"
 client = MongoClient(uri)
 db = client['WanderWorld']
 thread_collection = db['threads']
-
 
 @app.route("/")
 def index():
@@ -98,4 +96,4 @@ def comment_thread(thread_id):
 
 if __name__ == "__main__":
     # Run Flask
-    app.run()
+    app.run(host='0.0.0.0', port=5000, debug=True)

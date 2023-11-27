@@ -16,8 +16,7 @@ function CreatePost() {
   const [favoriteFood, setFavoriteFood] = useState("");
   const [favoriteActivity, setFavoriteActivity] = useState("");
 
-  const hostname =
-    "https://wander-world-bfzkz0w9z-eddie-cazares-projects.vercel.app";
+  const hostname = "https://wander-world-api.vercel.app";
   const navigate = useNavigate();
 
   const uploadPost = () => {
