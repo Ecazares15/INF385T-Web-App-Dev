@@ -6,7 +6,6 @@ import { createTheme, colors, ThemeProvider } from "@mui/material"
 
 import Home from "./pages/Home";
 import Login from "./components/Login";
-import Register from "./pages/Register";
 import Feed from "./pages/Feed";
 import Community from "./pages/Community";
 import Profile from "./pages/Profile";
@@ -42,7 +41,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/feed" element={<Feed />} />
-          <Route path="/register" element={<Register />} />
           <Route path="/community" element={<Community />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/feed/create" element={<CreatePost />} />

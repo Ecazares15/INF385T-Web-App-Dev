@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import axios, {Axios} from 'axios';
 import {Container, Grid, Button, TextField, Alert} from '@mui/material';
 import ThreadCard from "../components/ThreadCard";
@@ -10,14 +10,29 @@ axios.create({
     }
 });
 
+interface Comment {
+    content: string;
+}
+
 interface Thread {
+    _id: string;
     title: string;
     content: string;
+    likes: number;
+    dislikes: number;
+    comments: Comment[];
 }
 
 const Community: React.FC = () => {
     const [threads, setThreads] = useState<Thread[]>([]);
-    const [newThread, setNewThread] = useState<Thread>({ title: '', content: '' });
+    const [newThread, setNewThread] = useState<Thread>({
+        _id: '',
+        title: '',
+        content: '',
+        likes: 0,
+        dislikes: 0,
+        comments: []
+    });
     const [error, setError] = useState<string>('');
 
     const hostname = "http://127.0.0.1:5000"
@@ -40,58 +55,62 @@ const Community: React.FC = () => {
         }
         axios.post(`${hostname}/threads`, newThread)
             .then(response => {
-                setThreads([...threads, newThread])
+                console.log(response.data);
+                setThreads([...threads, response.data]);
             })
             .catch(error => {
                 console.error('Error creating thread:', error);
             });
 
-        setNewThread({ title: '', content: '' });
+        setNewThread({_id: '', title: '', content: '', likes: 0, dislikes: 0, comments: []});
         setError('');
     };
 
     return (
-            <Container className="community-container" maxWidth="md" style={{ backgroundColor: 'rgba(209,224,250,0.28)' }}>
-                <Grid container spacing={1}>
-                    <Grid item xs={12}>
-                        <TextField
-                            className="thread-textfield"
-                            label="Have something interesting to share with the community? "
-                            name="title"
-                            value={newThread.title}
-                            onChange={e => setNewThread({ ...newThread, [e.target.name]: e.target.value })}
-                            fullWidth
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            className="thread-textfield"
-                            label="Publish a thread to start chatting! "
-                            name="content"
-                            value={newThread.content}
-                            onChange={e => setNewThread({ ...newThread, [e.target.name]: e.target.value })}
-                            fullWidth
-                            multiline
-                            rows={4}
-                        />
-                    </Grid>
-                    <Grid item xs={12} container justifyContent="flex-end">
-                        <Button className="submit-button"  variant="contained" color="secondary" onClick={submitThread} style={{ marginRight: '10px'}}>
-                            Publish
-                        </Button>
-                    </Grid>
-                    {error && (
-                        <Grid item xs={12}>
-                            <Alert severity="error">{error}</Alert>
-                        </Grid>
-                    )}
-                    {threads.map((thread, index) => (
-                        <Grid item xs={12} key={index}>
-                            <ThreadCard title={thread.title} content={thread.content} />
-                        </Grid>
-                    ))}
+        <Container className="community-container" maxWidth="md" style={{backgroundColor: 'rgba(209,224,250,0.28)'}}>
+            <Grid container spacing={1}>
+                <Grid item xs={12}>
+                    <TextField
+                        className="thread-textfield"
+                        label="Have something interesting to share with the community? "
+                        name="title"
+                        value={newThread.title}
+                        onChange={e => setNewThread({...newThread, [e.target.name]: e.target.value})}
+                        fullWidth
+                    />
                 </Grid>
-            </Container>
+                <Grid item xs={12}>
+                    <TextField
+                        className="thread-textfield"
+                        label="Publish a thread to start chatting! "
+                        name="content"
+                        value={newThread.content}
+                        onChange={e => setNewThread({...newThread, [e.target.name]: e.target.value})}
+                        fullWidth
+                        multiline
+                        rows={4}
+                    />
+                </Grid>
+                <Grid item xs={12} container justifyContent="flex-end">
+                    <Button className="submit-button" variant="contained" color="secondary" onClick={submitThread}
+                            style={{marginRight: '10px'}}>
+                        Publish
+                    </Button>
+                </Grid>
+                {error && (
+                    <Grid item xs={12}>
+                        <Alert severity="error">{error}</Alert>
+                    </Grid>
+                )}
+                {threads.map((thread, index) => (
+                    <Grid item xs={12} key={index}>
+                        <ThreadCard id={thread._id} title={thread.title} content={thread.content}
+                                    initLikes={thread.likes} initDislikes={thread.dislikes}
+                                    initComments={thread.comments}/>
+                    </Grid>
+                ))}
+            </Grid>
+        </Container>
 
     );
 };
