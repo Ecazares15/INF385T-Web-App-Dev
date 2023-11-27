@@ -35,7 +35,8 @@ const Community: React.FC = () => {
     });
     const [error, setError] = useState<string>('');
 
-    const hostname = "http://127.0.0.1:5000"
+    const hostname =
+      "https://wander-world-qo5br4ctz-eddie-cazares-projects.vercel.app";
 
     useEffect(() => {
         axios.get(`${hostname}/threads`)
