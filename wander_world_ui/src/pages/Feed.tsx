@@ -35,7 +35,7 @@ function Feed(): JSX.Element {
   const [posts, setPosts] = useState([]);
 
   const hostname =
-    "https://wander-world-qo5br4ctz-eddie-cazares-projects.vercel.app";
+    "https://wander-world-bfzkz0w9z-eddie-cazares-projects.vercel.app";
 
   useEffect(() => {
     axios
