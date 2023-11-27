@@ -10,7 +10,9 @@ import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlin
 interface FeedPostProps {
   image: string;
   author: string;
-  caption: string;
+  description: string;
+  favoriteFood: string;
+  favoriteActivity: string;
   numLikes: number;
   onLikeClick: () => void;
   onSaveClick: () => void;
@@ -19,7 +21,9 @@ interface FeedPostProps {
 function FeedPost({
   image,
   author,
-  caption,
+  description,
+  favoriteFood,
+  favoriteActivity,
   numLikes,
   onLikeClick,
   onSaveClick,
@@ -51,13 +55,13 @@ function FeedPost({
               </div>
             </div>
             <Typography variant="body2" color="text.secondary">
-              {caption}
+              {description}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              This is question 1 answer
+              {favoriteFood}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              This is question 2 answer
+              {favoriteActivity}
             </Typography>
           </div>
         </div>

@@ -33,31 +33,17 @@ def get_users():
     return jsonify(list(users))
 
 
-@app.route('/posts', methods=['GET'])
-def get_posts():
-    """
-    :return: json of all posts in database or error
-    """
+@app.route('/posts', methods=['GET', 'POST'])
+def posts():
     post_collection = db['posts']
-    posts = post_collection.find({}, {'_id': False})
-    try:
+    if request.method == 'GET':
+        print(post_collection)
+        posts = post_collection.find({}, {'_id': False})
         return jsonify(list(posts))
-    except Exception as e:
-        return str(e)
-
-
-@app.route('/posts/add', methods=['POST'])
-def add_post(request):
-    """
-    :param request: json of new post
-    :return: json of status of post insertion
-    """
-    post_collection = db['posts']
-    try:
-        post_collection.insert_one(request.data)
+    elif request.method == 'POST':
+        post = request.json
+        post_collection.insert_one(post)
         return jsonify({'status': 'success'})
-    except Exception as e:
-        return jsonify({'status': 'failed', 'error': str(e)})
 
 
 @app.route('/threads', methods=['GET', 'POST'])
@@ -75,4 +61,4 @@ def threads():
 
 if __name__ == "__main__":
     # Run Flask
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', debug=True, port=5000)

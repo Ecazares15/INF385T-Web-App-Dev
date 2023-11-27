@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import axios from "axios";
 import Button from "@mui/material/Button";
+import storage from "../firebase"
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -16,7 +17,9 @@ import { Link } from "react-router-dom";
 interface Post {
   image: string;
   author: string;
-  caption: string;
+  description: string;
+  favoriteFood: string;
+  favoriteActivity: string;
   numLikes: number;
 }
 
@@ -28,7 +31,7 @@ function onSaveClick(): void {
   console.log("Save clicked");
 }
 
-function App(): JSX.Element {
+function Feed(): JSX.Element {
   const [posts, setPosts] = useState([]);
 
   const hostname = "http://127.0.0.1:5000";
@@ -51,7 +54,9 @@ function App(): JSX.Element {
       <FeedPost
         image={post.image}
         author={post.author}
-        caption={post.caption}
+        description={post.description}
+        favoriteFood={post.favoriteFood}
+        favoriteActivity={post.favoriteActivity}
         numLikes={post.numLikes}
         onLikeClick={onLikeClick}
         onSaveClick={onSaveClick}
@@ -60,27 +65,36 @@ function App(): JSX.Element {
   ));
   return (
     <div className="feed-swiper-container">
-      <Button className="mb-3" variant="contained">
-        <Link to="/feed/create" style={{textDecoration: "none", color: "black"}}>Create Post</Link>{" "}
-      </Button>
-      <Swiper
-        effect={"coverflow"}
-        grabCursor={true}
-        centeredSlides={true}
-        slidesPerView={"auto"}
-        coverflowEffect={{
-          rotate: 50,
-          stretch: 0,
-          depth: 100,
-          modifier: 1,
-          slideShadows: true,
-        }}
-        modules={[EffectCoverflow]}
-      >
-        {listItems}
-      </Swiper>
+      <div>
+        <Button className="mb-3" variant="contained">
+          <Link
+            to="/feed/create"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            Create Post
+          </Link>{" "}
+        </Button>
+      </div>
+      <div>
+        <Swiper
+          effect={"coverflow"}
+          grabCursor={true}
+          centeredSlides={true}
+          slidesPerView={"auto"}
+          coverflowEffect={{
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: true,
+          }}
+          modules={[EffectCoverflow]}
+        >
+          {listItems}
+        </Swiper>
+      </div>
     </div>
   );
 }
 
-export default App;
+export default Feed;
