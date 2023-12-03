@@ -47,23 +47,26 @@ def posts():
         return jsonify({'status': 'success'})
 
 
-@app.route('/threads', methods=['GET', 'POST'])
-def threads():
-    if request.method == 'GET':
-        print(thread_collection)
-        result = thread_collection.find({})
-        thread_list = []
-        for thread in result:
-            thread['_id'] = str(thread['_id'])
-            thread_list.append(thread)
-        return jsonify(thread_list)
-    elif request.method == 'POST':
-        thread = request.json
-        result = thread_collection.insert_one(thread)
-        new_thread = thread_collection.find_one({"_id": result.inserted_id})
-        if new_thread:
-            new_thread['_id'] = str(new_thread['_id'])
-        return jsonify({'status': 'success', 'thread': new_thread})
+@app.route('/threads', methods=['GET'])
+def show_threads():
+    result = thread_collection.find({})
+    thread_list = []
+    for thread in result:
+        thread['_id'] = str(thread['_id'])
+        thread_list.append(thread)
+    return jsonify(thread_list)
+
+
+@app.route('/threads', methods=['POST'])
+def add_threads():
+    thread = request.json
+    del thread['_id']
+    result = thread_collection.insert_one(thread)
+    new_thread = thread_collection.find_one({"_id": result.inserted_id})
+    print(new_thread)
+    if new_thread:
+        new_thread['_id'] = str(new_thread['_id'])
+    return jsonify({'status': 'success', 'thread': new_thread})
 
 
 @app.route('/threads/<thread_id>/like', methods=['POST'])

@@ -56,7 +56,7 @@ const Community: React.FC = () => {
         axios.post(`${hostname}/threads`, newThread)
             .then(response => {
                 console.log(response.data);
-                setThreads([...threads, response.data]);
+                setThreads([...threads, response.data.thread]);
             })
             .catch(error => {
                 console.error('Error creating thread:', error);

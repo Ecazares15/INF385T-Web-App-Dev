@@ -74,6 +74,7 @@ const ThreadCard: React.FC<ThreadProps> = ({id, title, content, initLikes, initD
             .catch(error => {
                 console.error("Error fetching comments", error);
             })
+        setComment('')
     }
 
     return (
