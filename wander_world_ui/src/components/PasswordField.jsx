@@ -28,7 +28,7 @@ const PasswordField = ({passwordRef, id='password', label='Password'}) => {
       InputProps={{
         endAdornment: (
           <InputAdornment position='end'>
-            <IconButton onClick={handleClick} onMouseDown={handleMouseDown}>
+            <IconButton aria-label="visibility" onClick={handleClick} onMouseDown={handleMouseDown}>
             {showPassword ? <VisibilityOff/> : <Visibility/>}
             </IconButton>
           </InputAdornment>
