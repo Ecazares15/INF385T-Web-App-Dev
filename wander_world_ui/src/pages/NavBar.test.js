@@ -3,6 +3,7 @@ import Home from './Home'
 import { BrowserRouter as Router } from 'react-router-dom';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
 
 
 describe('renders home component', () => {
@@ -11,11 +12,20 @@ describe('renders home component', () => {
     render(<Router><Home/></Router>);
   });
 
-  it('Feed check', async () => {
-
-    const feedButton = screen.getByText(/Feed/i);
-    expect(feedButton).toBeInTheDocument();
-
+  test('logo and navigation links', () => {
+    render(
+      <Router>
+        <NavBar />
+      </Router>
+    );
+  
+    // Check logo 
+    expect(screen.getByAltText('logo')).toBeInTheDocument();
+  
+    // Check links are present
+    expect(screen.getByText('WanderWorld')).toBeInTheDocument();
+    expect(screen.getByText('Feed')).toBeInTheDocument();
+    expect(screen.getByText('Community')).toBeInTheDocument();
   });
 
 
