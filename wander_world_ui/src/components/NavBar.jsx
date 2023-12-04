@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { useValue } from '../context/ContextProvider'
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from '../firebase'
+import UserMenu from './UserMenu';
 
 const pages = ['Feed', 'Community'];
 
@@ -19,17 +20,11 @@ const NavBar = () => {
     setAnchorElNav(event.currentTarget);
   };
 
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  const [anchorUserMenu, setAnchorUserMenu] = useState(null)
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -42,16 +37,6 @@ const NavBar = () => {
       }
     })
   }, [])
-
-  const handleLogout = () => {
-    signOut(auth).then(() => {
-      // sign out successful
-      console.log("signed out successfully")
-      dispatch({ type: 'UPDATE_USER', payload: null })
-    }).catch((error) => {
-      console.log(error)
-    })
-  }
 
   const { state: { currentUser }, dispatch } = useValue()
 
@@ -139,7 +124,7 @@ const NavBar = () => {
           ) : (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open User Settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <IconButton onClick={(e)=>setAnchorUserMenu(e.currentTarget)} sx={{ p: 0 }}>
                   <Avatar
                     style={{
                       backgroundColor: currentUser?.photoURL ? undefined : colors.green[500]
@@ -150,31 +135,7 @@ const NavBar = () => {
                   </Avatar>
                 </IconButton>
               </Tooltip>
-              <Menu
-                sx={{ mt: '45px' }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                <MenuItem>
-                  <ListItemIcon><Person fontSize='small' /></ListItemIcon>
-                  <Link style={{ textDecoration: 'none', color: 'black' }} to="/profile">Profile</Link>
-                </MenuItem>
-                <MenuItem onClick={handleLogout}>
-                  <ListItemIcon><Logout fontSize='small' /></ListItemIcon>
-                  Logout
-                </MenuItem>
-              </Menu>
+              <UserMenu {...{anchorUserMenu, setAnchorUserMenu}}/>
             </Box>
           )}
         </Toolbar>
