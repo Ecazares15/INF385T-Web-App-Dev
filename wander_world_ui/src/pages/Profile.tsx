@@ -4,7 +4,8 @@ import axios from 'axios';
 import { Avatar, colors } from '@mui/material';
 
 function Profile() {
-    const hostname = "https://wander-world-api.vercel.app"
+    const hostname =
+      "https://wander-world-api-ecazares15-eddie-cazares-projects.vercel.app/";
     const [userDetails, setUserDetails] = useState({
         name: 'Loading...',
         email: 'Loading...',
