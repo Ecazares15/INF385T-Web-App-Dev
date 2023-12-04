@@ -40,12 +40,13 @@ def get_user(uid):
         user['_id'] = str(user['_id'])
     return jsonify(user)
 
-@app.route('/users/<uid>', methods=['POST'])
-def update_user(uid):
-    user = user_collection.find_one({'uid': uid})
-    if user:
-        user['_id'] = str(user['_id'])
-    return jsonify(user)
+@app.route('/users/<uid>', methods=['DELETE'])
+def delete_user(uid):
+    result = user_collection.delete_one({'uid': uid})
+    if result.deleted_count > 0:
+        return jsonify({'status': 'success', 'message': 'User deleted successfully.'}), 200
+    else:
+        return jsonify({'status': 'error', 'message': 'No user found with the given UID.'}), 404
 
 @app.route('/users', methods=['POST'])
 def add_user():

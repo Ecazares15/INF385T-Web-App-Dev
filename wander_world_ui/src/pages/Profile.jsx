@@ -38,15 +38,12 @@ function Profile() {
         }
     
         if (window.confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
-            currentUser.delete().then(() => {
+            currentUser.delete().then(async () => {
                 console.log("User account deleted successfully.");
                 dispatch({ type: 'UPDATE_USER', payload: null })
-                // Redirect to login or some other page
-                // window.location.href = '/login'; // or use a React Router method
+                await axios.delete(`${hostname}/users/${currentUser.uid}`);
             }).catch((error) => {
                 console.error("Error deleting user account:", error);
-                // Handle the error appropriately
-                // Show an error message to the user, etc.
             });
         }
     };
