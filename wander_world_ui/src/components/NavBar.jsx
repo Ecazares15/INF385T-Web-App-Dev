@@ -1,10 +1,9 @@
 import { useState, useEffect} from 'react';
-import { AppBar, Box, Button, Container, IconButton, Toolbar, Typography, Menu, MenuItem, Tooltip, Avatar, ListItemIcon } from '@mui/material';
+import { AppBar, Box, Button, Container, IconButton, Toolbar, Typography, Menu, MenuItem, Tooltip, Avatar, ListItemIcon, colors } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Lock, Person, Logout } from '@mui/icons-material';
 import wanderWorldLogo from '../assets/wanderworld_logo.svg';
 import { Link } from 'react-router-dom';
-import photoURL from '../assets/profilePhoto.jpg'
 import { useValue } from '../context/ContextProvider'
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from '../firebase'
@@ -142,7 +141,9 @@ const NavBar = () => {
               <Tooltip title="Open User Settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar
-                    color="secondary"
+                    style={{
+                      backgroundColor: currentUser?.photoURL ? undefined : colors.green[500]
+                    }}
                     src={currentUser?.photoURL}
                     alt={currentUser?.name}>
                     {currentUser?.name?.charAt(0).toUpperCase()}

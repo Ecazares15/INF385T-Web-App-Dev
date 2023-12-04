@@ -72,7 +72,7 @@ function Home(): JSX.Element {
                 <Col md={4}>
                     <Typography variant="h6" color="primary">Join a world of shared experiences</Typography>
                     <img
-                    src={feedPic} // replace with your image path
+                    src={feedPic} 
                     alt="Feed"
                     className="img-fluid mb-3 category-img"
                     />

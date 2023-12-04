@@ -19,7 +19,7 @@ const theme = createTheme({
       main: colors.blue[800]
     },
     secondary: {
-      main: colors.deepOrange[600]
+      main: colors.deepOrange[700]
     },
     success: {
       main: colors.green[800]

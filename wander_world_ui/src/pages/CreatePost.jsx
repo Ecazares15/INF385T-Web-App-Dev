@@ -3,21 +3,41 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { storage } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { auth } from '../firebase';
 
 function CreatePost() {
   const [imageUpload, setImageUpload] = useState(null);
   const [description, setDescription] = useState("");
   const [favoriteFood, setFavoriteFood] = useState("");
   const [favoriteActivity, setFavoriteActivity] = useState("");
+  const [userDetails, setUserDetails] = useState({
+    name: 'author'
+  });
 
   const hostname = "https://wander-world-api.vercel.app";
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const currentUser = auth.currentUser;
+    if (currentUser) {
+        fetchUserDetails(currentUser.uid);
+    }
+  }, []);
+
+  const fetchUserDetails = async (uid) => {
+      try {
+          const response = await axios.get(`http://localhost:5000/users/${uid}`);
+          setUserDetails(response.data);
+      } catch (error) {
+          console.error("Error fetching user details:", error);
+      }
+  };
 
   const uploadPost = () => {
     if (imageUpload == null) {
@@ -34,7 +54,7 @@ function CreatePost() {
       getDownloadURL(snapshot.ref).then((url) => {
         axios
           .post(`${hostname}/posts`, {
-            author: "author",
+            author: userDetails.name,
             description: description,
             favoriteFood: favoriteFood,
             favoriteActivity: favoriteActivity,

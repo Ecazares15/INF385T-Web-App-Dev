@@ -7,6 +7,7 @@ import { Close, Send } from "@mui/icons-material";
 import { useValue } from "../context/ContextProvider";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../firebase'
+import axios from "axios";
 
 function Login() {
   
@@ -35,13 +36,28 @@ function Login() {
         return
       } 
       await createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
+        .then(async (userCredential) => {
           // signed in!
           const user = userCredential.user
           console.log(user)
+          const userData = {
+            uid: user.uid, // or any other user details you want to store
+            name: name,
+            email: email
+          };
+  
+          // Send POST request to Flask API
+          await axios.post('http://localhost:5000/users', userData)
+            .then(response => {
+              console.log('User added to MongoDB:', response.data);
+            })
+            .catch(error => {
+              console.error('Error adding user to MongoDB:', error);
+            });
+            
           dispatch({type:'UPDATE_ALERT', payload: {open:true, severity:'success', message:"Account created!"}})
           handleClose()
-          // TODO: add uid + name to database
+          
         }).catch((error) => {
           const errorCode = error.code
           const errorMessage = error.message

@@ -12,6 +12,7 @@ uri = "mongodb+srv://jasminewang:1234@inf385tcluster.b6esmhr.mongodb.net/?retryW
 client = MongoClient(uri)
 db = client['WanderWorld']
 thread_collection = db['threads']
+user_collection = db['users']
 
 @app.route("/")
 def index():
@@ -33,6 +34,28 @@ def get_users():
     users = user_collection.find({}, {'_id': False})
     return jsonify(list(users))
 
+@app.route('/users/<uid>', methods=['GET'])
+def get_user(uid):
+    user = user_collection.find_one({'uid': uid})
+    if user:
+            user['_id'] = str(user['_id'])
+    return jsonify(user)
+
+@app.route('/users', methods=['POST'])
+def add_user():
+    """
+    Add a new user to the database.
+    :return: JSON response indicating success or failure.
+    """
+    try:
+        user_data = request.json
+        result = user_collection.insert_one(user_data)
+        new_user = user_collection.find_one({"_id": result.inserted_id}, {'password': 0})
+        if new_user:
+            new_user['_id'] = str(new_user['_id'])
+        return jsonify({'status': 'success', 'user': new_user}), 201
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 500
 
 @app.route('/posts', methods=['GET', 'POST'])
 def posts():
@@ -95,7 +118,6 @@ def comment_thread(thread_id):
     )
     if result.modified_count:
         return jsonify({'status': 'success', 'comment': comment})
-
 
 if __name__ == "__main__":
     # Run Flask
