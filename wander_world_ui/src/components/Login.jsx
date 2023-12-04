@@ -31,7 +31,6 @@ function Login() {
       const confirmPassword = confirmPasswordRef.current.value
       // REGISTER
       if (password !== confirmPassword) {
-        
         dispatch({type:'UPDATE_ALERT', payload: {open:true, severity:'error', message:"Passwords don't match"}})
         return
       } 
@@ -81,7 +80,8 @@ function Login() {
               right:8,
               color:(theme)=> theme.palette.grey[500]
             }}
-            onClick={handleClose}>
+            onClick={handleClose}
+            aria-label="close">
             <Close/>
           </IconButton>
         </DialogTitle>
