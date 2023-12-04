@@ -7,7 +7,8 @@ import {
     DialogContent,
     DialogContentText,
     DialogTitle, Grid, TextField,
-    Typography
+    Typography,
+    colors
 } from '@mui/material';
 import Button from "@mui/material/Button";
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
@@ -84,11 +85,11 @@ const ThreadCard: React.FC<ThreadProps> = ({id, title, content, initLikes, initD
                 <Typography variant="body2">{content}</Typography>
             </CardContent>
             <CardActions className="card-actions">
-                <Button size="small" startIcon={<ThumbUpIcon/>} onClick={e =>
+                <Button size="small" style={{color: colors.green[800]}} startIcon={<ThumbUpIcon/>} onClick={e =>
                     handleLike()}>
                     Like {likes}
                 </Button>
-                <Button size="small" startIcon={<ThumbDownIcon/>} onClick={e =>
+                <Button size="small" style={{color: colors.deepOrange[700]}} startIcon={<ThumbDownIcon/>} onClick={e =>
                     handleDislike()}>
                     Dislike {dislikes}
                 </Button>

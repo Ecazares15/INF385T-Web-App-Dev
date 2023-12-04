@@ -11,6 +11,7 @@ import "./styles/Feed.css";
 import { EffectCoverflow } from "swiper/modules";
 import FeedPost from "../components/FeedPost";
 import { Link } from "react-router-dom";
+import { Create } from "@mui/icons-material";
 
 interface Post {
   image: string;
@@ -64,7 +65,7 @@ function Feed(): JSX.Element {
   return (
     <div className="feed-swiper-container">
       <div>
-        <Button className="mb-3" variant="contained" color="secondary">
+        <Button className="mb-3" variant="contained">
           <Link
             to="/feed/create"
             style={{ textDecoration: "none", color: "white" }}
