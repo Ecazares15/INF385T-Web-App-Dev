@@ -24,7 +24,6 @@ def index():
     except Exception as e:
         return str(e)
 
-
 @app.route('/users', methods=['GET'])
 def get_users():
     """
@@ -38,7 +37,14 @@ def get_users():
 def get_user(uid):
     user = user_collection.find_one({'uid': uid})
     if user:
-            user['_id'] = str(user['_id'])
+        user['_id'] = str(user['_id'])
+    return jsonify(user)
+
+@app.route('/users/<uid>', methods=['POST'])
+def update_user(uid):
+    user = user_collection.find_one({'uid': uid})
+    if user:
+        user['_id'] = str(user['_id'])
     return jsonify(user)
 
 @app.route('/users', methods=['POST'])

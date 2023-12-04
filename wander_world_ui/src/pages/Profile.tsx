@@ -1,19 +1,18 @@
 import { auth } from '../firebase'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Avatar, colors } from '@mui/material';
 
 function Profile() {
     const [userDetails, setUserDetails] = useState({
         name: 'Loading...',
         email: 'Loading...',
-        // Include other fields as needed with default values
+        photoURL: null
     });
 
     useEffect(() => {
-        // Check if there's a user logged in
         const currentUser = auth.currentUser;
         if (currentUser) {
-            // Fetch user details from your API
             fetchUserDetails(currentUser.uid);
         }
     }, []);
@@ -24,7 +23,6 @@ function Profile() {
             setUserDetails(response.data);
         } catch (error) {
             console.error("Error fetching user details:", error);
-            // Handle errors here, such as showing an alert or a message on the UI
         }
     };
 
@@ -32,11 +30,16 @@ function Profile() {
         <div>
             <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
             <div style={{ marginBottom: '20px' }}>
-                <h1>Welcome, {userDetails.name}!</h1>
-                <h3>Email: {userDetails.email}</h3>
-                {/* Display other user details here */}
+                <Avatar
+                    style={{
+                      backgroundColor: userDetails?.photoURL ? undefined : colors.green[500]
+                    }}
+                    alt={userDetails?.name}>
+                    {userDetails?.name?.charAt(0).toUpperCase()}
+                  </Avatar>
+                  <h1>Welcome, {userDetails.name}!</h1>
+                  <h3>Email: {userDetails.email}</h3>
             </div>
-            {/* Add other profile related elements here */}
         </div>
         </div>
     )

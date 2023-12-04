@@ -12,6 +12,7 @@ import Profile from "./pages/Profile";
 import CreatePost from "./pages/CreatePost";
 import NavBar from "./components/NavBar";
 import Notification from "./components/Notification";
+import Protected from "./components/Protected";
 
 const theme = createTheme({
   palette: {
@@ -40,9 +41,9 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/feed" element={<Feed />} />
-          <Route path="/community" element={<Community />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/feed" element={<Protected><Feed /></Protected>} />
+          <Route path="/community" element={<Protected><Community /></Protected>} />
+          <Route path="/profile" element={<Protected><Profile /></Protected>} />
           <Route path="/feed/create" element={<CreatePost />} />
         </Routes>
       </div>
