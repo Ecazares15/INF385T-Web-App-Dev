@@ -1,11 +1,11 @@
 import { useState, useEffect} from 'react';
-import { AppBar, Box, Button, Container, IconButton, Toolbar, Typography, Menu, MenuItem, Tooltip, Avatar, ListItemIcon, colors } from '@mui/material';
+import { AppBar, Box, Button, Container, IconButton, Toolbar, Typography, Menu, MenuItem, Tooltip, Avatar, colors } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Lock, Person, Logout } from '@mui/icons-material';
+import { Lock } from '@mui/icons-material';
 import wanderWorldLogo from '../assets/wanderworld_logo.svg';
 import { Link } from 'react-router-dom';
 import { useValue } from '../context/ContextProvider'
-import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../firebase'
 import UserMenu from './UserMenu';
 
@@ -14,7 +14,6 @@ const pages = ['Feed', 'Community'];
 const NavBar = () => {
 
   const [anchorElNav, setAnchorElNav] = useState(null);
-  const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
