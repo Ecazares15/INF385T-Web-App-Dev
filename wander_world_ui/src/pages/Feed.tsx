@@ -65,7 +65,7 @@ function Feed(): JSX.Element {
   return (
     <div className="feed-swiper-container">
       <div>
-        <Button className="mb-3" variant="contained">
+        <Button className="mb-3" variant="contained" color="secondary" endIcon={<Create/>}>
           <Link
             to="/feed/create"
             style={{ textDecoration: "none", color: "white" }}

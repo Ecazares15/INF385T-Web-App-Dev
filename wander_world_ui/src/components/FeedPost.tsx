@@ -6,6 +6,8 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
+import LikeButton from "./LikeButton";
+import SaveButton from "./SaveButton";
 
 interface FeedPostProps {
   image: string;
@@ -47,22 +49,18 @@ function FeedPost({
                 </Typography>
               </div>
               <div>
-                <Button size="medium" onClick={onLikeClick}>
-                  <FavoriteBorderOutlinedIcon fontSize="medium" />
-                </Button>
-                <Button size="medium" onClick={onSaveClick}>
-                  <BookmarkBorderOutlinedIcon fontSize="medium" />
-                </Button>
+                <LikeButton/>
+                <SaveButton/>
               </div>
             </div>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" color="text">
               {description}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {favoriteFood}
+            <Typography variant="body2" color="text">
+              Favorite Food 😋: {favoriteFood}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {favoriteActivity}
+            <Typography variant="body2" color="text">
+              Favorite Activity 🕺: {favoriteActivity}
             </Typography>
           </div>
         </div>

@@ -10,6 +10,7 @@ import { v4 } from "uuid";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from '../firebase';
+import { Send, Cancel } from "@mui/icons-material";
 
 function CreatePost() {
   const [imageUpload, setImageUpload] = useState(null);
@@ -72,14 +73,14 @@ function CreatePost() {
   };
 
   return (
-    <Container
+      <Container
       className="mt-5"
-      sx={{ display: "flex", justifyContent: "center" }}
+      sx={{ display: "flex", justifyContent: "center", backgroundColor: '#e3f2fd' }}
     >
       <Paper className="w-50 h-50" elevation={1}>
         <div className="m-5">
           <div className="pb-3">
-            <h1>Post Something...</h1>
+            <h2>Post Something... 🤔</h2>
           </div>
           <div className="pb-3 text-center">
             <label htmlFor="upload-button">
@@ -109,7 +110,7 @@ function CreatePost() {
           </div>
           <div className="pb-3">
             <div>
-              <strong>Description</strong>
+              Description ✍️
             </div>
             <TextField
               required
@@ -124,7 +125,7 @@ function CreatePost() {
           </div>
           <div className="pb-3">
             <div>
-              <strong>Favorite thing you ate</strong>
+              Favorite thing you ate 😋
             </div>
             <TextField
               required
@@ -139,7 +140,7 @@ function CreatePost() {
           </div>
           <div className="pb-3">
             <div>
-              <strong>Favorite thing you did</strong>
+              Favorite thing you did 🕺
             </div>
             <TextField
               required
@@ -153,10 +154,10 @@ function CreatePost() {
             />
           </div>
           <div className="d-flex justify-content-center">
-            <Button className="me-5" variant="contained" onClick={uploadPost}>
+            <Button className="me-5" variant="contained" onClick={uploadPost} endIcon={<Send/>}>
               Post
             </Button>
-            <Button variant="contained">
+            <Button variant="contained" endIcon={<Cancel/>} color="error">
               <Link
                 to="/feed"
                 style={{ textDecoration: "none", color: "white" }}

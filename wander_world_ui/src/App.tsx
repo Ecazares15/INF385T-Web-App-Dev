@@ -1,8 +1,8 @@
-import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { createTheme, colors, ThemeProvider } from "@mui/material"
+import "./index.css"
 
 import Home from "./pages/Home";
 import Login from "./components/Login";
@@ -35,7 +35,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <div className="App">
+      <div>
         <Notification />
         <Login />
         <NavBar />
@@ -44,7 +44,7 @@ function App() {
           <Route path="/feed" element={<Protected><Feed /></Protected>} />
           <Route path="/community" element={<Protected><Community /></Protected>} />
           <Route path="/profile" element={<Protected><Profile /></Protected>} />
-          <Route path="/feed/create" element={<CreatePost />} />
+          <Route path="/feed/create" element={<Protected><CreatePost /></Protected>} />
         </Routes>
       </div>
     </LocalizationProvider>

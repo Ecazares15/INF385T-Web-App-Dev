@@ -68,7 +68,7 @@ def posts():
     post_collection = db['posts']
     if request.method == 'GET':
         print(post_collection)
-        posts = post_collection.find({}, {'_id': False})
+        posts = post_collection.find({}, {'_id': False}).sort('_id', -1)
         return jsonify(list(posts))
     elif request.method == 'POST':
         post = request.json

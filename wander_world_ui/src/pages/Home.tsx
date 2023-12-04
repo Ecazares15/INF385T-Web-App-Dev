@@ -1,4 +1,4 @@
-import { Button, Typography, colors } from "@mui/material";
+import { Button, Paper, Typography, colors } from "@mui/material";
 import { Carousel, Container, Row, Col } from "react-bootstrap";
 import pic1 from '../assets/1.jpeg'
 import pic2 from '../assets/2.png'
@@ -10,6 +10,7 @@ import feedPic from '../assets/feed.jpeg'
 import profilePic from '../assets/profile.jpeg'
 import './styles/Home.css'
 import { useNavigate } from "react-router-dom";
+import { Collections, Forum, Person } from "@mui/icons-material";
 
 function Home(): JSX.Element {
 
@@ -70,31 +71,40 @@ function Home(): JSX.Element {
             <Container>
                 <Row className="text-center">
                 <Col md={4}>
-                    <Typography variant="h6" color="primary">Join a world of shared experiences</Typography>
+                <Paper className="p-3 mb-5" elevation={1}>
+                <Typography variant="h6" color="primary">Join a world of shared experiences</Typography>
                     <img
                     src={feedPic} 
                     alt="Feed"
                     className="img-fluid mb-3 category-img"
                     />
-                    <Button color="primary" onClick={goToFeed}>Feed</Button>
+                    <Button color="primary" variant="contained" onClick={goToFeed} endIcon={<Collections/>}>Feed</Button>
+                    </Paper>
+                    
                 </Col>
                 <Col md={4}>
-                    <Typography variant="h6" color="secondary">Embrace the world's wonders together</Typography>
+                <Paper className="p-3 mb-5" elevation={1}>
+                <Typography variant="h6" color="secondary">Embrace the world's wonders together</Typography>
                     <img
                     src={communityPic}
                     alt="Community"
                     className="img-fluid mb-3 category-img"
                     />
-                    <Button color="secondary" onClick={goToCommunity}>Community</Button>
+                    <Button color="secondary"variant="contained" onClick={goToCommunity} endIcon={<Forum/>}>Community</Button>
+                    </Paper>
+                    
                 </Col>
                 <Col md={4}>
-                    <Typography variant="h6" style={{ color: colors.green[800]}}>Navigate the world and share your story</Typography>
+                <Paper className="p-3 mb-5" elevation={1}>
+                <Typography variant="h6" style={{ color: colors.green[800]}}>Navigate the world and share your story</Typography>
                     <img
                     src={profilePic}
                     alt="Profile"
                     className="img-fluid mb-3 category-img"
                     />
-                    <Button color="success" onClick={goToProfile}>Profile</Button>
+                    <Button color="success" variant="contained" onClick={goToProfile} endIcon={<Person/>}>Profile</Button>
+                </Paper>
+                    
                 </Col>
                 </Row>
             </Container>

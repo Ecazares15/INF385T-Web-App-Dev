@@ -67,7 +67,7 @@ const Community: React.FC = () => {
     };
 
     return (
-        <Container className="community-container" maxWidth="md" style={{backgroundColor: 'rgba(209,224,250,0.28)'}}>
+        <Container className="community-container" maxWidth="md">
             <Grid container spacing={1}>
                 <Grid item xs={12}>
                     <TextField
