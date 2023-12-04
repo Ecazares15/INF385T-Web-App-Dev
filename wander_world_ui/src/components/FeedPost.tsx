@@ -35,6 +35,7 @@ function FeedPost({
         height="450"
         image={image}
         sx={{ objectFit: "cover" }}
+        loading="lazy"
       />
       <CardContent>
         <div style={{ display: "flex" }}>

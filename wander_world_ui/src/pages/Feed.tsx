@@ -2,11 +2,9 @@ import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import axios from "axios";
 import Button from "@mui/material/Button";
-import storage from "../firebase"
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
-import "swiper/css/pagination";
 
 import "./styles/Feed.css";
 
@@ -66,7 +64,7 @@ function Feed(): JSX.Element {
   return (
     <div className="feed-swiper-container">
       <div>
-        <Button className="mb-3" variant="contained">
+        <Button className="mb-3" variant="contained" color="secondary">
           <Link
             to="/feed/create"
             style={{ textDecoration: "none", color: "white" }}
