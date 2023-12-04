@@ -19,6 +19,8 @@ function Login() {
   const passwordRef = useRef()
   const confirmPasswordRef = useRef()
 
+  const hostname = "https://wander-world-api.vercel.app"
+
   const handleClose = () => {
     dispatch({type:'CLOSE_LOGIN'})
   }
@@ -47,7 +49,7 @@ function Login() {
           };
   
           // Send POST request to Flask API
-          await axios.post('http://localhost:5000/users', userData)
+          await axios.post(`${hostname}/users`, userData)
             .then(response => {
               console.log('User added to MongoDB:', response.data);
             })

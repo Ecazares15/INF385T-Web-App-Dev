@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Avatar, colors } from '@mui/material';
 
 function Profile() {
+    const hostname = "https://wander-world-api.vercel.app"
     const [userDetails, setUserDetails] = useState({
         name: 'Loading...',
         email: 'Loading...',
@@ -19,7 +20,7 @@ function Profile() {
 
     const fetchUserDetails = async (uid: string) => {
         try {
-            const response = await axios.get(`http://localhost:5000/users/${uid}`);
+            const response = await axios.get(`${hostname}/users/${uid}`);
             setUserDetails(response.data);
         } catch (error) {
             console.error("Error fetching user details:", error);

@@ -36,7 +36,7 @@ const ThreadCard: React.FC<ThreadProps> = ({id, title, content, initLikes, initD
     const [comment, setComment] = useState('');
     const [comments, setComments] = useState(initComments);
 
-    const hostname = "http://127.0.0.1:5000";
+    const hostname = "https://wander-world-api.vercel.app";
 
     const handleLike = async () => {
         console.log(id)
