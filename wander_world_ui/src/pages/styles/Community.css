@@ -1,0 +1,13 @@
+.community-container {
+    padding: 40px;
+    max-width: 50%;
+    min-height: 100vh;
+}
+
+.submit-button {
+    margin-right: 10px;
+}
+
+.thread-textfield {
+    background-color: white;
+}

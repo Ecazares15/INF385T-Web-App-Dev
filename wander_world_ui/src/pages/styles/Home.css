@@ -1,0 +1,14 @@
+.fixed-height-carousel .carousel-item {
+  height: 45vh;
+}
+
+.fixed-height-carousel .carousel-item img {
+  height: 100%;
+  object-fit: cover; 
+}
+
+.category-img {
+  height: 20vh;
+  width: 100%;
+  object-fit: cover;
+}
